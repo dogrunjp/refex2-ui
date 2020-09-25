@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>RefEx ver.2 Chart for Gene Expression</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/flat/blue.css">
+    <link rel="stylesheet" href="../css/refex.css">
+    <link rel="stylesheet" href="../css/datatables.min.css">
+    <link rel="stylesheet" href="../css/d3-annotation.css">
+    <link rel="stylesheet" href="../css/fontawesome/css/all.css">
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Latest compiled and minified CSS -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/icheck.js"></script>
+    <script src="../js/typeahead.bundle.js"></script>
+    <script src="../js/datatables.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="logotype">
+                <a href="/"><img src="../images/logo_refex_ver2.png" width="127" height="22"
+                                 alt="refex version 2"></a>
+            </div>
+            <feature></feature>
+            <control>
+                <div class="ctrl">
+                    <button type=button id="compare_genes" class="btn btn-primary btn-sm">Compare</button>
+                    <button type="button" id="sort_bar" class="btn btn-primary btn-sm" style="display: none"><i class="fas fa-align-left"></i>
+                        Sort
+                    </button>
+                </div>
+                <div id="legends"></div>
+            </control>
+
+        </div>
+
+    </nav>
+
+    <div id="chart_panel" class="panel">
+        <div id="chart_head"></div>
+        <bbchart>
+            <div id="barchart">
+
+                <div class="chart"></div>
+                <div class="info">
+                    <menu></menu>
+                </div>
+            </div>
+        </bbchart>
+    </div>
+
+    <summary>
+        <div class="summary_list"></div>
+    </summary>
+
+</div> <!-- /container -->
+
+<div class="modal fade" id="compare" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#input_gene_info" data-toggle="tab">Gene name or Symbol</a>
+                    </li>
+
+                    <li>
+                        <a href="#similar_expression" data-toggle="tab">Similar expression</a>
+                    </li>
+                    <li>
+                        <a href="#input_gene_id" data-toggle="tab">NCBI GeneIDs</a>
+                    </li>
+
+                </ul>
+
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="input_gene_id">
+                        <div class="input-group">
+                            <label>Compare with comma separated ID list </label>
+                            <input type="text" id="input_gene_ids" class="form-control" value="" placeholder="Input NCBI GeneIDs">
+
+                        </div>
+                        <p class="text-right">
+                            <button type=button id="btn_show_ids" class="btn btn-primary btn-sm">show grouped chart</button>
+                        </p>
+                    </div>
+
+                    <div class="tab-pane" id="similar_expression">
+                        <div>
+                            <!-- modal window for similar gene -->
+                            <similar_genes></similar_genes>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="input_gene_info">
+                        <label>Search for Gene name or Symbol</label>
+                        <div class="navbar-form">
+                            <div id="refex" class="input-group">
+
+                                <div class="input-group-btn">
+                                    <!--
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <span class="caret-down">Show </span>
+                                    </button>
+                                    -->
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">One by one</a>
+                                        <a class="dropdown-item" style="color: #999">In a group</a>
+                                    </div>
+                                </div>
+
+                                <input type="Search" placeholder="Input gene name..." class="form-control typeahead"/>
+                                <input type="hidden" id="refex_id" value="">
+
+                            </div>
+                        </div>
+                        <p class="text-right">
+                            <button type=button id="btn_close_compare_window" class="btn btn-primary btn-sm">close window</button>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="pop"  class='panel panel-default filter'>
+    <div class='panel-heading'>sort</div>
+    <div class="panel-body">
+        <a href='#sort_desc' id='sort_desc' data-option='desc' class='list-group-item'><i class='fas fa-sort-amount-down-alt'></i> sort </a>
+        <a href='#sort_asc' id='sort_asc' data-option='asc' class='list-group-item'><i class='fas fa-sort-amount-down'></i> sort </a>
+    </div>
+    <div class='panel-heading'>filter</div>
+    <div class="panel-body">
+        <div class='input-group'>
+        <input type='text' id='filter_word' class='form-control' placeholder='input keyword'>
+        <span class='input-group-btn'>
+            <button type='button' data-option='filter' id='filter_column' class='btn btn-default'>Submit</button>
+        </span>
+        </div>
+    </div>
+
+    <div class='panel-heading' style="display: none">style </div>
+    <div class="panel-body" style="display: none">
+        <a href='#show_color' id='show_color' class='list-group-item'><i class='fas fa-fill-drip'></i> Color categorize </a>
+    </div>
+
+    <div class='panel-body'>
+        <a href='#release' id='release_filter' class='list-group-item'>release all filters</a>
+    </div>
+    <div class="panel-footer">
+        <button type="button" id="close_pop" class="btn-sm" data-toggle="collapse">Close</button>
+    </div>
+</div>
+
+<gene_info></gene_info>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/3.3.1/es6-promise.min.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
+<script src="http://d3js.org/d3.v4.min.js"></script>
+<script src="../js/d3-symbol-extra.min.js"></script>
+<script src="../js/d3-legend.min.js"></script>
+<script src="../js/configure.js"></script>
+<!-- <script src="./js/chart.js"></script> -->
+
+
+<script src="../js/typeahead.bundle.js"></script>
+<script src="../data/cage_human_sample_map.js"></script>
+
+
+
+<!-- riot -->
+<script type="riot/tag" src="../modules/feature.tag"></script>
+<script type="riot/tag" src="../modules/similar_genes.tag"></script>
+<script type="riot/tag" src="../modules/menu.tag"></script>
+<script type="riot/tag" src="../modules/gene_info.tag"></script>
+<script src="https://cdn.jsdelivr.net/npm/riot@3.13/riot+compiler.min.js"></script>
+
+
+<script>
+    riot.compile(function () {
+        var tags = riot.mount('*')
+    });
+    var obs = riot.observable();
+</script>
+<script src="../js/result_table.js"></script>
+<script src="../js/screener_min.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>

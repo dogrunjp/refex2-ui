@@ -1,0 +1,594 @@
+body {
+    padding-top: 110px;
+    background-color: #ECF0F3;
+}
+
+.zoom {
+    cursor: move;
+    fill: none;
+    pointer-events: all;
+}
+
+.bar {
+    clip-path: url(#clip);
+}
+
+nav.navbar {
+    border-top: solid 4px #488EC4;
+}
+
+.container-fluid {
+    margin: 0 10px;
+}
+
+.tick line {
+    opacity: 0.4;
+    stroke-dasharray: 2 6;
+}
+
+input[type=button] {
+    font-family: FontAwesome;
+}
+
+svg.bar_chart .legend_view {
+    cursor: pointer;
+}
+
+.typeahead.dropdown-menu {
+    z-index: 1051;
+    position: relative;
+    top: 0 !important;
+    left: 0 !important;
+
+}
+
+div#chart_head table th {
+    font-weight: normal;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+div#chart_head table th .xscale {
+    font-weight: normal;
+    font-size: 11px;
+}
+
+div#chart_head table th div {
+    margin-top: 22px;
+}
+
+div#chart_head table th div.tpm {
+    display: flex;
+    margin-top: 10px;
+}
+
+table.sample_list td {
+    margin: 0 8px 0 0;
+    padding: 0;
+    height: 18px;
+    font-size: 14px;
+    line-height: 0.85;
+}
+
+table.sample_list td div.sample_desc {
+    /*width: 500px;*/
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+
+table.sample_list td div.sample_cat {
+    width: 100px
+}
+
+div#chart_head table thead {
+    margin: 0;
+    padding: 0;
+    height: 40px;
+}
+
+table.sample_list td div {
+    padding: 0;
+    margin: 0 8px 0 0;
+    min-width: 100px;
+}
+
+table.sample_list div.sample_description {
+    max-width: 375px;
+}
+
+thead > tr > th > div {
+
+}
+
+.table > tbody > tr > td {
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    vertical-align: middle !important;
+    border: none !important;
+}
+
+.table > tbody > tf > td.sorting_1 {
+    padding: 0 !important;
+}
+
+svg.lp_cahrt {
+    height: 18px;
+}
+
+table.sample_list td div.sample_value {
+    margin: 0;
+    padding: 0;
+}
+
+tbody > tr.table_row > td > div > text {
+    margin-left: 4px;
+    color: #555555;
+}
+
+div.dataTables_scrollBody {
+    border: solid 1px #d8d8d8;
+}
+
+div.feature.info {
+    display: flex;
+    font-size: 1.75rem;
+    margin: 10px 2px 10px;
+    font-weight: bold;
+}
+
+div.feature > div.comparison {
+    font-size: 1.5rem;
+    margin-left: 40px;
+    margin-top: 2px;
+    font-weight: normal;
+
+}
+
+/* navbar */
+nav.navbar.navbar-fixed-top {
+    border-bottom: solid 1px #e5e9ec;
+}
+
+nav {
+    border-top: solid 3px #488EC4;
+}
+
+.navbar-default .logotype {
+    padding-left: 2px;
+    padding-top: 20px;
+}
+
+/* chart */
+
+div#chart_head {
+    width: 100%;
+    margin-top: 4px;
+    height: 50px;
+}
+
+bbchart div.chart {
+    height: 74vh;
+    overflow-y: scroll;
+    border-bottom: solid 1px #d8d8d8;
+}
+
+control {
+    display: flex;
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+control div.ctrl {
+    font-weight: bold;
+    font-size: 16px;
+    color: #2e80ce;
+    margin-right: 80px;
+}
+
+span.f-btn i {
+    color: #4d4d4d;
+    font-size: 9px;
+    padding-left: 2px;
+}
+
+span.f-btn:hover, span.f-btn i:hover {
+    color: #9d9d9d;
+}
+
+div.tooltip {
+    padding: 4px;
+    border: solid 1px #de2b61;
+    background-color: #eeeeee;
+    border-radius: 4px;
+    color: #de2b61;
+}
+
+div#pop {
+    opacity: 0;
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 0;
+    z-index: auto;
+    width: 300px;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+div.popover {
+}
+
+div.panel.filter {
+    width: 250px
+}
+
+div#chart_panel {
+    margin-top: 68px;
+}
+
+#barchart {
+    margin-top: 2px;
+    display: flex;
+    min-width: 1140px;
+}
+
+#barchart .info {
+    width: 280px;
+    margin-left: 8px;
+    margin-top: 0;
+    line-height: 1.2;
+    font-size: 12px;
+}
+
+#barchart .info h3 {
+    font-size: 14px;
+    margin: 0 0 2px 0;
+    display: inline;
+}
+
+#barchart .sample_ref {
+    width: 240px;
+    margin-bottom: 4px;
+}
+
+#barchart .bc-btn {
+    cursor: pointer;
+}
+
+#barchart .bc-btn text {
+    fill: #2d83d0;
+}
+
+#barchart .bc-btn text:hover {
+    fill: #888;
+}
+
+#barchart rect.f_bar,
+#barchart g.f_bar rect {
+    cursor: pointer;
+}
+
+/* mygene info */
+i.btn {
+    color: #2e80ce;
+    cursor: pointer;
+}
+
+#geneinfo h1 {
+    font-size: 18px;
+}
+#geneinfo h2{
+    background: #ECF0F3;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-top: 8px;
+    padding: 4px 15px;
+    font-size: 16px;
+}
+#geneinfo h3{
+    font-size: 16px;
+    margin: 0;
+    padding: 4px 15px;
+}
+
+#geneinfo .box_container {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+#geneinfo .panel-body {
+    width: 100%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+#geneinfo .box_container li:not(:last-child):after{
+    content: ',';
+    margin-right: 4px;
+}
+
+/* screener */
+
+#charts {
+    padding: 10px 0;
+}
+
+.chart {
+    display: inline-block;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.reset {
+    padding-left: 1em;
+    font-size: smaller;
+    color: #2d83d0;
+}
+
+a.reset :hover {
+    color: #444;
+}
+
+.background.bar {
+    fill: #ccc;
+}
+
+.foreground.bar {
+    fill: steelblue;
+}
+
+.brush-handle {
+    fill: #eee;
+    stroke: #666;
+}
+
+#hour-chart {
+    width: 260px;
+}
+
+#delay-chart {
+    width: 230px;
+}
+
+#distance-chart {
+    width: 430px;
+}
+
+#date-chart {
+    width: 920px;
+}
+
+#flight-list {
+    min-height: 1024px;
+}
+
+#flight-list .date,
+#flight-list .day {
+    margin-bottom: .4em;
+}
+
+#flight-list .flight {
+    line-height: 1.5em;
+    background: #eee;
+    width: 925px;
+    margin-bottom: 1px;
+}
+
+#flight-list .time {
+    color: #999;
+}
+
+#flight-list .flight div {
+    display: inline-block;
+}
+
+#flight-list div.time {
+    width: 100px;
+    text-align: left;
+}
+
+#flight-list div.origin {
+    width: 50px;
+    text-align: right;
+    padding-right: 15px;
+}
+
+#flight-list div.destination {
+    width: 100px;
+    text-align: left;
+    padding-left: 15px;
+}
+
+#flight-list div.distance {
+    width: 100px;
+    text-align: left;
+}
+
+#flight-list div.delay {
+    width: 120px;
+    padding-right: 0px;
+    text-align: right;
+}
+
+#flight-list .early {
+    color: green;
+}
+
+.annotation-name {
+    width: 200px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.add_selector, .add_extra_selector {
+    cursor: pointer;
+}
+
+.add_selector i, .add_extra_selector i{
+    margin-right: 4px;
+}
+
+.add_sample {
+    margin-left: 8px;
+    margin-top: 3px ;
+    cursor: pointer;
+}
+.add_sample i{
+    margin-right: 4px;
+}
+div.panel.annotation{
+    width: 750px
+}
+div.panel.annotation div.panel-body{
+    display: flex;
+    width: 750px;
+    padding: 4px 15px;
+}
+div.panel.annotation .cv{
+    color: #555555;
+    padding: 2px 8px;
+    border: solid 1px #888 ;
+    border-radius: 4px;
+}
+
+div.panel.annotation .cv i{
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+div.cv-options {
+    display: flex;
+    flex-wrap: wrap;
+    width: 700px;
+}
+div.cv-selector {
+    width: 22%;
+    margin-right: 12px;
+}
+
+aside {
+    position: absolute;
+    left: 740px;
+    font-size: smaller;
+    width: 220px;
+}
+
+.logotype img {
+    margin-bottom: 20px;
+}
+.container-fluid.screener{
+    margin-top: -20px;
+}
+.container.screener {
+    padding-top: 16px;
+    padding-bottom: 24px;
+    border: solid 1px #e5e9ec;
+}
+
+.portfolio {
+    display: none;
+}
+
+portfolio div.panel {
+    border: solid 1px #e5e9ec;
+}
+portfolio table.table.glist{
+    width: 90%;
+}
+portfolio table.table.glist tbody tr td {
+  color: #2e80ce;
+    max-width: 400px;
+    padding: 2px 10px !important;
+}
+portfolio div#gene_list_view label{
+    padding-top: 4px;
+}
+portfolio button.btn-sm {
+    padding: 0 8px;
+    margin-left: 16px;
+}
+
+.row.screener {
+    margin-top: 16px;
+    margin-bottom: 16px
+}
+
+.row.screener label {
+    height: 10px;
+}
+
+#screener_found {
+    color: #444444;
+    font-size: 30px;
+}
+
+div.screener label {
+    margin-top: 12px;
+    color: #444444;
+    font-size: 18px;
+}
+
+div.screener label .addfilter{
+    margin-left: 8px;
+    font-size: 14px;
+    color: #488EC4;
+    cursor: pointer;
+}
+
+div.screener label .addfilter i{
+    margin-right: 4px;
+}
+
+div.screener label.form-check-lavel {
+    color: #555555;
+    font-size: 14px;
+}
+
+.hm rect {
+    cursor: pointer;
+}
+
+.navbar-form #refex input, .navbar-form #go input {
+    border-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    width: 750px;
+}
+
+.navbar-form div.input-group.sample input {
+    width: 500px;
+}
+
+span.symbol {
+    font-weight: bold;
+}
+
+
+screener-annotation .navbar-form {
+    padding-bottom: 0;
+}
+
+#drop_holder{
+    border: 2px dotted #555555;
+    width: 750px;
+    padding: 10px;
+    color: #999999;
+  opacity: 1;
+
+}
+
+i.fa-window-close{
+    margin-left: 12px;
+}
+
+g.legendCells g.cell rect{
+    cursor: pointer;
+}
+
+#gene_list_view img{
+    border: solid 1px #aabcd4;
+    background-color: #e5ebee;
+}

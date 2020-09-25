@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <style type="text/css">
+        .zoom{
+            cursor: move;
+            fill: none;
+            pointer-events: all;
+        }
+
+        .bar {
+          clip-path: url(#clip);
+        }
+
+    </style>
+
+
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>RefEx next alpha version</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/flat/blue.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Latest compiled and minified CSS -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/icheck.js"></script>
+    <script src="js/typeahead.bundle.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div id="search" class="container-fluid">
+            <div class="logotype">
+                <a href="./sample.html"><img src="images/refex_next_alpha_logo.png" width="141" height="23" alt="refex next-alph version"></a>
+            </div>
+
+
+        </div>
+    </nav>
+        <div class="container screener">
+            <div class="row">
+                <div class="col-sm-9">
+
+                    <label>Search for Gene name of Symbol</label>
+                    <div class="navbar-form">
+                        <div id="refex" class="input-group">
+
+                            <div class="input-group-btn">
+                                    <!--
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <span class="caret-down">Show </span>
+                                    </button>
+                                    -->
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item" href="#">One by one</a>
+                                      <a class="dropdown-item" style="color: #999">In a group</a>
+                                    </div>
+                            </div>
+
+                            <input type="Search" placeholder="Input gene name..." class="form-control typeahead"/>
+                            <input type="hidden" id="refex_id" value="">
+
+                        </div>
+                    </div>
+
+
+                    <label for="gene_id_list">Gene IDs</label>
+                    <input type="text" id="gene_id_list" name="gene_id_list" class="form-control form-control-lg" placeholder="Inter Gene IDs ex. 2,9,10,12" aria-describedby="basic-addon1">
+
+                    <div class="row screener">
+                        <div class="col-sm-2">
+                            <div class="dropdown">
+                                <label for="stats_option">Statistics</label>
+                                <select id="stats_option" name="stats_option" class="form-control">
+                                  <option value="mean">Mean</option>
+                                  <option value="median">Median</option>
+                                  <option value="sd">SD</option>
+                                  <option value="max">Max</option>
+                                  <option value="min">Min</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-2">
+                            <div class="dropdown">
+                                <label for="stats_operator">  </label>
+                                <select id="stats_operator" name="stats_operator" class="form-control">
+                                  <option value="gt">Greather than</option>
+                                  <option value="lt">Less than</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-8">
+                            <label for="stats_value">  </label>
+                            <input id="stats_value" name="stats_value" type="text" class="form-control form-control-lg" aria-label="...">
+                        </div>
+                    </div>
+
+                    <div class="row screener">
+                        <div class="col-sm-12">
+                            <label for="specificity">Sample specificity</label>
+                            <select id="specificity" name="specificity"  class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="row screener">
+                        <div class="col-sm-6">
+                          <button type="button" class="btn" id="find_genes">Find Genes</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-3">
+                    <p>
+                    Estimated<br>
+                    Results
+                    </p>
+                    <p><span id="screener_found">0</span></p>
+
+                </div>
+            </div>
+        </div>
+
+
+        <portfolio class="portfolio">
+            <table class="table glist">
+                <thead>
+                <tr><th>Name</th><th>Symbol</th><th>Gene ID</th><th>Organism</th><th>Sort key</th><th class="more"></th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </portfolio>
+
+        <bbchart>
+            <div id="barchart">
+                <div class="chart"></div>
+                <div class="info">
+                    <div class="gene_info"></div>
+                    <div class="description"></div>
+                    <div class="sample_name"></div>
+                    <div class="refex_id"></div>
+                    <div class="exp_val"></div>
+                    <div class="sample_ref"></div>
+                </div>
+            </div>
+        </bbchart>
+
+        <summary>
+            <div class="summary_list"></div>
+        </summary>
+
+
+</div> <!-- /container -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script src="http://d3js.org/d3.v4.min.js"></script>
+<script src="./js/d3-annotation.min.js"></script>
+<script src="./js/d3-symbol-extra.min.js"></script>
+<script src="./js/d3-legend.min.js"></script>
+<script src="./js/rdf_query.js"></script>
+<script src="./data/cage_human_sample_map.js"></script>
+<script src="./data/refex_gene_human.js"></script>
+<script src="js/bak_2019_3_refex.js"></script>
+
+
+</body>
+</html>

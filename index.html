@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    /* style for crossfilter */
+    /*@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700);*/
+
+  body {
+    font-family: 'Helvetica Neue';
+
+  }
+
+    /*
+  footer {
+    padding:32px 0 16px 0;
+    font-size: 12px;
+  }
+  */
+
+  h1 {
+    font-size: 96px;
+    margin-top: .3em;
+    margin-bottom: 0;
+  }
+
+  h1 + h2 {
+    margin-top: 0;
+  }
+
+  h2 {
+    font-weight: 400;
+    font-size: 28px;
+  }
+
+  h1, h2 {
+    font-family: 'Yanone Kaffeesatz';
+    text-rendering: optimizeLegibility;
+  }
+
+  #body > p {
+    line-height: 1.5em;
+    width: 640px;
+    text-rendering: optimizeLegibility;
+  }
+
+
+
+</style>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>RefEx ver.2</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/flat/blue.css">
+    <link rel="stylesheet" href="css/refex.css">
+    <link rel="stylesheet" href="css/fontawesome/css/all.css">
+
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Latest compiled and minified CSS -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/icheck.js"></script>
+    <script src="js/typeahead.bundle.js"></script>
+
+</head>
+
+<body>
+<div class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="logotype">
+                <a href="./"><img src="images/logo_refex_ver2.png" width="127" height="22"
+                                 alt="refex version 2"></a>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container-fluid screener">
+    <div class="container screener panel">
+        <div class="row">
+            <div class="col-sm-10">
+
+                <label>Project & Organism</label>
+                <div class="navbar-form">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="radio1" data-org="human" data-project="cage" checked>
+                        <label class="form-check-lavel" for="radio1">  FANTOM5 (Homo sapiens)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="radio2" data-org="mouse" data-project="cage" disabled="disabled">
+                        <label class="form-check-lavel" for="radio2">  FANTOM5 (Mus musculus)</label>
+                    </div>
+                </div>
+
+                <label>Search for Gene Name, Symbol or Summary</label>
+                <div class="navbar-form">
+                    <div id="refex" class="input-group">
+                        <div class="input-group-btn">
+                                <!--
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <span class="caret-down">Show </span>
+                                </button>
+                                -->
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item" href="#">One by one</a>
+                                  <a class="dropdown-item" style="color: #999">In a group</a>
+                                </div>
+                        </div>
+
+                        <input type="Search" placeholder="Input gene name..." class="form-control typeahead"/>
+                        <input type="hidden" id="refex_id" value="">
+
+                    </div>
+
+                    <div class="form-check">
+                        Include this field in search
+                        <input class="form-check-input" type="checkbox" name="field" id="is_summary">
+                        <label class="form-check-lavel" for="is_summary">  summary</label>
+                    </div>
+                </div>
+
+
+                <label>Search for the genes with GO Term </label>
+                <div class="navbar-form">
+                    <div id="go" class="input-group">
+                        <div class="input-group-btn">
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item" href="#">One by one</a>
+                                  <a class="dropdown-item" style="color: #999">In a group</a>
+                                </div>
+                        </div>
+
+                        <input type="Search" placeholder="Input GO term (e.g. DNA-binding transcription factor activity) " class="form-control typeahead"/>
+                        <input type="hidden" id="go_name" value="">
+
+                    </div>
+                </div>
+
+
+
+                <label for="drop_holder">Search for genes in your gene list <i id="empty_gl" class="far fa-window-close"></i></label>
+                <div id="gid_list" class="navbar-form">
+                    <div id="drop_holder">Drop your tab text file</div>
+                    <div id="status"></div>
+                </div>
+
+
+                <screener-annotation></screener-annotation>
+
+
+                <div class="row screener">
+                    <div class="col-sm-6">
+                      <button type="button" class="btn btn-primary" id="find_genes">Find Genes</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-2">
+                <p>
+                Estimated<br>
+                Results
+                </p>
+                <p><span id="screener_found">0</span></p>
+
+            </div>
+        </div>
+    </div>
+
+    <portfolio></portfolio>
+</div> <!-- /container -->
+
+<gene_info></gene_info>
+
+<script src="./js/d3-symbol-extra.min.js"></script>
+<script src="./js/configure.js"></script>
+
+
+<!-- riot -->
+<script type="riot" src="modules/screener-annotation.tag"></script>
+<script type="riot" src="modules/portfolio.tag"></script>
+<!--
+<script type="riot/tag" src="modules/feature.tag"></script>
+-->
+<script type="riot/tag" src="modules/gene_info_portfolio.tag"></script>
+<script type="text/javascript" src="https://unpkg.com/riot@4/riot+compiler.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@riotjs/observable@4.0.4/dist/observable.js"></script>
+<script>
+    var project="gtx", organism;
+
+    riot
+        .compile()
+        .then(function () {
+        riot.mount('*')
+    });
+    var obs = riot.observable();
+    var store = {"specific_exp":[]}
+</script>
+<script src="js/screener.js"></script>
+
+</body>
+</html>

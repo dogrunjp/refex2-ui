@@ -1,0 +1,7 @@
+There is no no-color option ("less --help" for help)
+// Fixed Width Icons
+// -------------------------
+.@{fa-css-prefix}-fw {
+  text-align: center;
+  width: (20em / 16);
+}

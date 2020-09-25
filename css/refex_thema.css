@@ -1,0 +1,10 @@
+.container > .header{
+    margin-top: 50px;
+}
+
+.navbar > .navbar-default{
+    background-color: white;
+}
+.navbar > .navbar-default > .container-fluid{
+    height: 100px;
+}

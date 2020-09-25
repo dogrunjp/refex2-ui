@@ -1,0 +1,47 @@
+<app>
+    <h1>{props.title}</h1>
+    <ul>
+        <li class="Pati">
+            Button Pati: <button-a observable={obs} />
+        </li>
+
+        <li class="Hanako">
+            Button Hana: <button-b observable={obs} />
+        </li>
+
+    </ul>
+
+    <script>
+        export default {
+            onBeforeMount(props, state) {
+
+                this.obs = observable(this)
+                this.obs.on('*', (name, val) => {
+                    this.$(`li.${val}`).style.color = "#ED1846";
+                    setTimeout(() => {
+                        this.$(`li.${val}`).style.color = "black";
+                    }, 500)
+                })
+
+            }
+        }
+
+
+    </script>
+
+<style>
+    ul{
+        padding-left: 20px;
+    }
+    li {
+        list-style: none;
+    }
+    li:last-child {
+        margin-top: 20px;
+    }
+</style>
+
+
+
+
+</app>
