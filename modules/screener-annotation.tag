@@ -118,22 +118,22 @@
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 prefetch: 'http://refex2-api.bhx.jp/api/vocablary?annotation=NCIT%20label'
             });
-            $('#sample_type .typeahead').typeahead(null, {
-                name: 'sample_types',
-                source:bl_sample_type
-            });
-            $('#cell_ontology .typeahead').typeahead(null, {
-                limit:25,
-                source: bl_cell_ontology
-            });
-            $('#tissue_type .typeahead').typeahead(null, {
-                limit: 25,
-                source: bl_tissue_type
-            });
-            $('#ncit_label .typeahead').typeahead(null, {
-                limit: 25,
-                source: bl_nict_label
-            });
+    $('#sample_type .typeahead').typeahead(null, {
+        name: 'sample_types',
+        source:bl_sample_type
+    });
+    $('#cell_ontology .typeahead').typeahead(null, {
+        limit:25,
+        source: bl_cell_ontology
+    });
+    $('#tissue_type .typeahead').typeahead(null, {
+        limit: 25,
+        source: bl_tissue_type
+    });
+    $('#ncit_label .typeahead').typeahead(null, {
+        limit: 25,
+        source: bl_nict_label
+    });
             self.update();
 
             /* typeahead イベントハンドラ */
